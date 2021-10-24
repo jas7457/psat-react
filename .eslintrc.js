@@ -25,6 +25,12 @@ module.exports = {
 	rules: {
 		'@typescript-eslint/no-non-null-assertion': 'off',
 		'no-prototype-builtins': 'off',
+		'react-hooks/exhaustive-deps': [
+			'warn',
+			{
+				additionalHooks: 'useAsync',
+			},
+		],
 	},
 	settings: {
 		react: {

@@ -1,15 +1,15 @@
 import { Route, Redirect, RouteProps } from 'react-router-dom';
 
-import useAuth from '../hooks/useAuth';
+import { useUnsafeAuth } from '../hooks/useAuth';
 
 export default function PrivateRoute({ children, ...rest }: RouteProps) {
-	const { user } = useAuth();
+	const { user } = useUnsafeAuth();
 
 	return (
 		<Route
 			{...rest}
-			render={({ location }) =>
-				user ? (
+			render={({ location }) => {
+				return user ? (
 					children
 				) : (
 					<Redirect
@@ -19,8 +19,8 @@ export default function PrivateRoute({ children, ...rest }: RouteProps) {
 							state: { from: location },
 						}}
 					/>
-				)
-			}
+				);
+			}}
 		/>
 	);
 }

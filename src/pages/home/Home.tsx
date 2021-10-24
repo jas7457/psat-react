@@ -1,3 +1,5 @@
+import Container from 'components/style-guide/Container';
+
 export default function Home() {
-	return <div>Home Page</div>;
+	return <Container>Home Page</Container>;
 }

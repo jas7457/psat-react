@@ -1,16 +1,17 @@
 import { useState } from 'react';
-import { Redirect, useLocation } from 'react-router';
+import { Redirect, useLocation } from 'react-router-dom';
 
-import Button from '../../components/style-guide/Button';
-import Link from '../../components/style-guide/Link';
-import useAuth from '../../hooks/useAuth';
+import Button from 'components/style-guide/Button';
+import Link from 'components/style-guide/Link';
+import { useUnsafeAuth } from 'hooks/useAuth';
+import type { Location } from 'history';
 
 export default function Login() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const location = useLocation<{ from?: string } | null>();
+	const location = useLocation<{ from?: Location } | null>();
 
-	const { user, login } = useAuth();
+	const { user, login } = useUnsafeAuth();
 
 	// if we're already logged in, redirect to the home page
 	if (user) {
@@ -33,7 +34,7 @@ export default function Login() {
 					className="space-y-4"
 					onSubmit={(e) => {
 						e.preventDefault();
-						login({ email, password, redirectTo: location.state?.from ?? '/' });
+						login({ email, password, redirectTo: location.state?.from });
 					}}
 				>
 					<FormInput label="Email Address" icon="icon" value={email} onSetValue={setEmail} />

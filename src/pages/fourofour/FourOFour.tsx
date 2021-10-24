@@ -1,3 +1,5 @@
+import Container from 'components/style-guide/Container';
+
 export default function FourOFour() {
-	return <div>Page not found</div>;
+	return <Container>Page not found</Container>;
 }

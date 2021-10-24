@@ -1,10 +1,12 @@
 import clsx from 'clsx';
+import { Link as ReactRouterLink, LinkProps as ReactRouterLinkProps } from 'react-router-dom';
+
 import { Colors, getColor } from '../../util/getColors';
 
 export default function Link({ children, href, color = 'primary', className, ...rest }: LinkProps) {
 	return (
-		<a
-			href={href}
+		<ReactRouterLink
+			to={href}
 			className={clsx(
 				className,
 				getColor(color),
@@ -13,12 +15,11 @@ export default function Link({ children, href, color = 'primary', className, ...
 			{...rest}
 		>
 			{children}
-		</a>
+		</ReactRouterLink>
 	);
 }
 
-interface LinkProps extends React.PropsWithoutRef<JSX.IntrinsicElements['a']> {
-	children: React.ReactNode;
+type LinkProps = Omit<ReactRouterLinkProps, 'to'> & {
 	href: string;
 	color?: Colors;
-}
+};
