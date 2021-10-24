@@ -5,15 +5,15 @@ import assertNever from '../../util/assertNever';
 import { getBgColor, getBorderColor } from '../../util/getColors';
 
 /**
- * Typical buttons with some constraints.
+ * Typical buttons with some guard rails.
  */
 export default function Button({
 	children,
 	color = 'primary',
 	buttonStyle = 'outline',
 	size = 'medium',
-	disabled = false,
 	shape = 'normal',
+	disabled = false,
 	className,
 	...rest
 }: ButtonProps) {
@@ -43,6 +43,8 @@ export default function Button({
 						return [...classes, 'text-warning hover:bg-warning-light focus:bg-warning-light'];
 					case 'danger':
 						return [...classes, 'text-danger hover:bg-danger-light focus:bg-danger-light'];
+					case 'success':
+						return [...classes, 'text-success hover:bg-success-light focus:bg-success-light'];
 					default:
 						return assertNever(color);
 				}
@@ -103,9 +105,9 @@ export default function Button({
 	);
 }
 
-interface ButtonProps extends React.PropsWithoutRef<JSX.IntrinsicElements['button']> {
+export interface ButtonProps extends React.PropsWithoutRef<JSX.IntrinsicElements['button']> {
 	/** The color for the button */
-	color?: 'primary' | 'secondary' | 'warning' | 'danger';
+	color?: 'primary' | 'secondary' | 'warning' | 'danger' | 'success';
 
 	/** The button style */
 	buttonStyle?: 'fill' | 'outline' | 'link';

@@ -1,6 +1,6 @@
 import { Route, Redirect, RouteProps } from 'react-router-dom';
 
-import { useUnsafeAuth } from '../hooks/useAuth';
+import { useUnsafeAuth } from 'hooks/useAuth';
 
 export default function PrivateRoute({ children, ...rest }: RouteProps) {
 	const { user } = useUnsafeAuth();

@@ -12,7 +12,10 @@ export type Colors =
 	| 'warning-dark'
 	| 'danger'
 	| 'danger-light'
-	| 'danger-dark';
+	| 'danger-dark'
+	| 'success'
+	| 'success-light'
+	| 'success-dark';
 
 export function getColor(color: Colors): string {
 	switch (color) {
@@ -40,6 +43,12 @@ export function getColor(color: Colors): string {
 			return 'text-danger-light';
 		case 'danger-dark':
 			return 'text-danger-dark';
+		case 'success':
+			return 'text-success';
+		case 'success-light':
+			return 'text-success-light';
+		case 'success-dark':
+			return 'text-success-dark';
 		default:
 			return assertNever(color);
 	}
@@ -71,6 +80,12 @@ export function getBgColor(color: Colors): string {
 			return 'bg-danger-light';
 		case 'danger-dark':
 			return 'bg-danger-dark';
+		case 'success':
+			return 'bg-success';
+		case 'success-light':
+			return 'bg-success-light';
+		case 'success-dark':
+			return 'bg-success-dark';
 		default:
 			return assertNever(color);
 	}
@@ -102,6 +117,12 @@ export function getBorderColor(color: Colors): string {
 			return 'border-danger-light';
 		case 'danger-dark':
 			return 'border-danger-dark';
+		case 'success':
+			return 'border-success';
+		case 'success-light':
+			return 'border-success-light';
+		case 'success-dark':
+			return 'border-success-dark';
 		default:
 			return assertNever(color);
 	}

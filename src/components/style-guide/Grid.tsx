@@ -14,6 +14,7 @@ export default function Grid({
 	gap = 'none',
 	...rest
 }: GridProps) {
+	console.log('Rendering the Grid', columns, typeof columns);
 	return (
 		<div
 			className={clsx(

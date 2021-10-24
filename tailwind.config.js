@@ -22,6 +22,11 @@ module.exports = {
 				dark: '#cb5c00',
 			},
 			danger: { light: '#d63636', DEFAULT: '#C62828', dark: '#a82222' },
+			success: {
+				light: '#41a445',
+				DEFAULT: '#388E3C',
+				dark: '#2e7431',
+			},
 			transparent: 'transparent',
 			current: 'currentColor',
 			white: '#fff',
