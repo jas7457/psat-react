@@ -5,6 +5,7 @@ import Button from 'components/style-guide/Button';
 import Link from 'components/style-guide/Link';
 import { useUnsafeAuth } from 'hooks/useAuth';
 import type { Location } from 'history';
+import Card from 'components/style-guide/Card';
 
 export default function Login() {
 	const [email, setEmail] = useState('');
@@ -25,7 +26,7 @@ export default function Login() {
 				<span className="text-gray-400">Security Education Platform</span>
 			</div>
 
-			<div className="bg-white p-4 shadow-lg">
+			<Card className="p-4">
 				<div>Proofpoint logo</div>
 
 				<hr className="my-4 border-gray-300" />
@@ -34,6 +35,9 @@ export default function Login() {
 					className="space-y-4"
 					onSubmit={(e) => {
 						e.preventDefault();
+						if (!email || !password) {
+							return;
+						}
 						login({ email, password, redirectTo: location.state?.from });
 					}}
 				>
@@ -54,9 +58,9 @@ export default function Login() {
 				<hr className="my-4 border-gray-300" />
 
 				<div className="text-center">
-					<Link href="/logout">Forgot your password?</Link>
+					<Link to="/logout">Forgot your password?</Link>
 				</div>
-			</div>
+			</Card>
 		</div>
 	);
 }

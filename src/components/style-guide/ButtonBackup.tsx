@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Link as ReactRouterLink, LinkProps as ReactRouterLinkProps } from 'react-router-dom';
 
 import assertNever from '../../util/assertNever';
 import { getBgColor, getBorderColor } from '../../util/getColors';
@@ -8,14 +7,13 @@ import { getBgColor, getBorderColor } from '../../util/getColors';
 /**
  * Typical buttons with some guard rails.
  */
-export default function Button<TButtonElement extends ButtonElement = 'button'>({
+export default function Button<TButtonElement extends React.ElementType = 'button'>({
 	children,
 	color = 'primary',
 	buttonStyle = 'outline',
 	size = 'medium',
 	shape = 'default',
 	disabled = false,
-	justify = 'justify-center',
 	as,
 	className,
 	...rest
@@ -104,27 +102,17 @@ export default function Button<TButtonElement extends ButtonElement = 'button'>(
 		}
 	})();
 
-	// either 'a' or 'button' or ReactRouterLink
-	const Component = (() => {
-		if (!as || as === 'button') {
-			return 'button';
-		}
-		if (as === 'a') {
-			return 'a';
-		}
-
-		return ReactRouterLink;
-	})();
+	// either 'a' or 'button'
+	const Component = as ?? 'button';
 
 	return (
 		<Component
 			data-component="button"
 			{...(as === 'button' ? { disabled } : {})}
-			{...(disabled && { tabIndex: -1 })}
 			className={clsx(
 				className,
-				justify,
 				'inline-flex',
+				'justify-center',
 				'uppercase',
 				'border',
 				'focus:outline-dashed outline outline-current -outline-offset-1',
@@ -140,8 +128,7 @@ export default function Button<TButtonElement extends ButtonElement = 'button'>(
 	);
 }
 
-type ButtonElement = 'button' | 'link' | 'a';
-export type ButtonProps<TButtonElement extends ButtonElement> = {
+export type ButtonProps<TButtonElement extends React.ElementType> = {
 	/* The element to render the button as, either "button" or "a" */
 	as?: TButtonElement;
 
@@ -160,12 +147,5 @@ export type ButtonProps<TButtonElement extends ButtonElement> = {
 	/** Whether the button is disabled */
 	disabled?: boolean;
 
-	/** How to justify the text in the button */
-	justify?: 'justify-start' | 'justify-center' | 'justify-end';
-
 	children: React.ReactNode;
-} & (TButtonElement extends 'link'
-	? ReactRouterLinkProps
-	: TButtonElement extends 'button'
-	? React.ComponentPropsWithoutRef<'button'>
-	: React.ComponentPropsWithoutRef<'a'>);
+} & React.ComponentPropsWithoutRef<TButtonElement>;

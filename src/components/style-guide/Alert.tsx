@@ -2,8 +2,10 @@ import React from 'react';
 import clsx from 'clsx';
 
 import Button, { ButtonProps } from './Button';
-import { getBorderColor } from '../../util/getColors';
 import Heading, { HeadingLevel } from './Heading';
+import Card from './Card';
+
+import { getBorderColor } from '../../util/getColors';
 
 /**
  * An alert to show the user
@@ -16,14 +18,10 @@ export default function Alert({
 	className,
 	...rest
 }: AlertProps) {
-	console.log(onClose);
 	return (
-		<div
-			className={clsx(
-				className,
-				'flex items-start p-2 border-t-2 bg-white rounded shadow-md',
-				getBorderColor(type),
-			)}
+		<Card
+			data-component="alert"
+			className={clsx(className, 'flex items-start p-2 border-t-2', getBorderColor(type))}
 			{...rest}
 		>
 			<div className="flex-grow">
@@ -50,13 +48,13 @@ export default function Alert({
 					X
 				</Button>
 			)}
-		</div>
+		</Card>
 	);
 }
 
-interface AlertProps extends React.PropsWithoutRef<JSX.IntrinsicElements['div']> {
+export interface AlertProps extends React.PropsWithoutRef<JSX.IntrinsicElements['div']> {
 	/** The alert type, which also sets the icon */
-	type: ButtonProps['color'];
+	type: ButtonProps<'button'>['color'];
 
 	/** Passing in an onClose is what adds the X button. If you don't want your alert to be closeable, don't pass this prop. */
 	onClose?: React.MouseEventHandler<HTMLButtonElement>;

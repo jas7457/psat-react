@@ -15,8 +15,8 @@ export default function Header({ className }: { className?: string }) {
 					<span className="text-xl font-medium">Security Education Platform</span>
 					{auth.user && (
 						<>
-							<Link href="/">Home</Link>
-							<Link href="/about">About</Link>
+							<Link to="/">Home</Link>
+							<Link to="/about">About</Link>
 						</>
 					)}
 				</div>

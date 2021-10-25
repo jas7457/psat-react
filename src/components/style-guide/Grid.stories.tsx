@@ -1,7 +1,6 @@
-import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Grid from './Grid';
+import Grid, { GridProps } from './Grid';
 
 const oneThroughTwelve = Array.from({ length: 12 }, (_val, index) => index + 1);
 
@@ -22,7 +21,7 @@ export default {
 } as ComponentMeta<typeof Grid>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Grid> = (args) => <Grid {...args} />;
+const Template: ComponentStory<typeof Grid> = (args: GridProps) => <Grid {...args} />;
 
 export const ExampleGrid = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args

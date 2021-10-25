@@ -1,6 +1,6 @@
 export default function Spinner() {
 	return (
-		<div className="bg-gray-700 inline-flex items-center p-2 rounded-lg">
+		<div data-component="spinner" className="bg-gray-700 inline-flex items-center p-2 rounded-lg">
 			<svg
 				className="animate-spin h-10 w-10 text-white"
 				xmlns="http://www.w3.org/2000/svg"

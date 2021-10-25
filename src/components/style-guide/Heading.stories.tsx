@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Heading, { HeadingLevel } from './Heading';
+import Heading, { HeadingLevel, HeadingProps } from './Heading';
 
 const oneThroughSix = Array.from({ length: 6 }, (_val, index) => index + 1);
 
@@ -15,7 +15,7 @@ export default {
 } as ComponentMeta<typeof Heading>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Heading> = (args) => <Heading {...args} />;
+const Template: ComponentStory<typeof Heading> = (args: HeadingProps) => <Heading {...args} />;
 
 export const NormalHeading = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
@@ -35,7 +35,7 @@ export const NestedHeadings = () => {
 			<HeadingLevel>
 				<Heading styleLevel={1}>I am an h2, styled to look like an h1</Heading>
 				<HeadingLevel>
-					<Heading styleLevel={2}>I am an h3, styled to look like an h2</Heading>
+					<Heading styleLevel={5}>I am an h3, styled to look like an h5</Heading>
 				</HeadingLevel>
 			</HeadingLevel>
 		</>

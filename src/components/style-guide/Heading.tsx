@@ -21,7 +21,7 @@ export default function Heading({ styleLevel, children, className, ...rest }: He
 	});
 
 	return (
-		<HeadingComponent className={clsx(className, styleClass)} {...rest}>
+		<HeadingComponent data-component="heading" className={clsx(className, styleClass)} {...rest}>
 			{children}
 		</HeadingComponent>
 	);
@@ -38,7 +38,7 @@ export function HeadingLevel({ children }: { children: React.ReactNode }) {
 	return <HeadingContext.Provider value={nextLevel}>{children}</HeadingContext.Provider>;
 }
 
-interface HeadingProps extends React.PropsWithoutRef<JSX.IntrinsicElements['h1']> {
+export interface HeadingProps extends React.PropsWithoutRef<JSX.IntrinsicElements['h1']> {
 	styleLevel: 1 | 2 | 3 | 4 | 5 | 6;
 	children: React.ReactNode;
 }

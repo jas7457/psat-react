@@ -7,7 +7,7 @@ import clsx from 'clsx';
  */
 export default function Container({ children, className, ...rest }: ContainerProps) {
 	return (
-		<div className={clsx(className, 'max-w-6xl', 'mx-auto')} {...rest}>
+		<div data-component="container" className={clsx(className, 'max-w-6xl', 'mx-auto')} {...rest}>
 			{children}
 		</div>
 	);

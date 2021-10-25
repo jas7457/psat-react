@@ -17,6 +17,7 @@ export default function Grid({
 	console.log('Rendering the Grid', columns, typeof columns);
 	return (
 		<div
+			data-component="grid"
 			className={clsx(
 				'grid',
 				className,
@@ -105,7 +106,7 @@ export default function Grid({
 
 type Cols = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
-type GridProps = Pick<
+export type GridProps = Pick<
 	React.PropsWithoutRef<JSX.IntrinsicElements['div']>,
 	'onClick' | 'className'
 > & {

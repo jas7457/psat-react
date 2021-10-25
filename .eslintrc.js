@@ -31,6 +31,7 @@ module.exports = {
 				additionalHooks: 'useAsync',
 			},
 		],
+		'react/no-unescaped-entities': ['error', { forbid: ['>', '}'] }],
 	},
 	settings: {
 		react: {
@@ -39,7 +40,7 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: ['.eslintrc.js'],
+			files: ['.eslintrc.js', 'config/*.js'],
 			env: {
 				node: true,
 			},

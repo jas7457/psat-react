@@ -3,10 +3,10 @@ import { Link as ReactRouterLink, LinkProps as ReactRouterLinkProps } from 'reac
 
 import { Colors, getColor } from 'util/getColors';
 
-export default function Link({ children, href, color = 'primary', className, ...rest }: LinkProps) {
+export default function Link({ children, color = 'primary', className, ...rest }: LinkProps) {
 	return (
 		<ReactRouterLink
-			to={href}
+			data-component="link"
 			className={clsx(
 				className,
 				getColor(color),
@@ -19,7 +19,6 @@ export default function Link({ children, href, color = 'primary', className, ...
 	);
 }
 
-type LinkProps = Omit<ReactRouterLinkProps, 'to'> & {
-	href: string;
+type LinkProps = ReactRouterLinkProps & {
 	color?: Colors;
 };

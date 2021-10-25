@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { useState } from 'react';
 
-import Alert from './Alert';
+import Alert, { AlertProps } from './Alert';
 import Button from './Button';
 
 export default {
@@ -18,7 +18,7 @@ export default {
 	},
 } as ComponentMeta<typeof Alert>;
 
-const Template: ComponentStory<typeof Alert> = (args) => <Alert {...args} />;
+const Template: ComponentStory<typeof Alert> = (args: AlertProps) => <Alert {...args} />;
 
 export const CloseableAlert = Template.bind({});
 CloseableAlert.args = {
@@ -57,22 +57,11 @@ export const FullStory: ComponentStory<typeof Alert> = () => {
 				passing an <code>onClose</code> method into the <code>Alert</code>. If no{' '}
 				<code>onClose</code> method is passed in, the X button will not appear.
 			</p>
-			<Button
-				onClick={() => {
-					setIsAlertOpen(!isAlertOpen);
-				}}
-			>
-				Toggle alert
-			</Button>
+
+			<Button onClick={() => setIsAlertOpen(!isAlertOpen)}>Toggle alert</Button>
 
 			{isAlertOpen && (
-				<Alert
-					type="warning"
-					heading="Heading"
-					onClose={() => {
-						setIsAlertOpen(false);
-					}}
-				>
+				<Alert type="warning" heading="Heading" onClose={() => setIsAlertOpen(false)}>
 					Alert
 				</Alert>
 			)}

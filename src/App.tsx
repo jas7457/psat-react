@@ -1,19 +1,15 @@
 import { ContextType, useEffect, useMemo, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, BrowserRouter as Router, Link } from 'react-router-dom';
 
 import Footer from 'components/Footer';
 import Header from 'components/Header';
 import Main from 'components/Main';
 
 import AuthContext, { UserData } from 'contexts/AuthContext';
-import HeadingContext from 'contexts/HeadingContext';
 import Spinner from 'components/style-guide/Spinner';
 import useCookie from 'hooks/useCookie';
 import Sidebar from 'components/Sidebar';
 import Overlay from 'components/style-guide/Overlay';
-import useFetch from 'hooks/useFetch';
-import Alert from './components/style-guide/Alert';
-import Heading, { HeadingLevel } from 'components/style-guide/Heading';
 
 export default function App() {
 	const [accessToken, setAccessToken, removeAccessToken] = useCookie<string | null>(
@@ -24,17 +20,6 @@ export default function App() {
 	const [isLoadingUser, setIsLoadingUser] = useState(true);
 
 	const history = useHistory();
-
-	const [todo, { abort }] = useFetch<{
-		completed: boolean;
-		id: number;
-		title: string;
-		userId: number;
-	}>('https://jsonplaceholder.typicode.com/todos/1');
-
-	useEffect(() => {
-		abort();
-	}, [abort]);
 
 	// an effect to load the user if one is saved as an access token
 	useEffect(() => {
@@ -72,59 +57,31 @@ export default function App() {
 		};
 	}, [user, setUser, history, setAccessToken, removeAccessToken]);
 
-	const [showAlert, setShowAlert] = useState(false);
+	const shouldShowSidebar = !!user;
 
 	return (
-		<AuthContext.Provider value={userValue}>
-			{todo && <div>{todo.title}</div>}
-			<div className="min-h-screen flex flex-col">
-				<Header className="flex-shrink-0" />
+		<Router>
+			<AuthContext.Provider value={userValue}>
+				<div className="min-h-screen flex flex-col">
+					<Header className="flex-shrink-0" />
+					<div className="flex-grow flex">
+						{shouldShowSidebar && <Sidebar className="flex-shrink-0 w-20" />}
+						{isLoadingUser ? (
+							<Overlay>
+								<Spinner />
+							</Overlay>
+						) : (
+							<div className="flex-grow flex flex-col">
+								<Main className="flex-grow" />
+								{shouldShowSidebar && <Footer className="flex-shrink-0" />}
+							</div>
+						)}
+					</div>
 
-				<button
-					onClick={() => {
-						setShowAlert(!showAlert);
-					}}
-				>
-					Toggle alert
-				</button>
-				<div className="bg-primary h-2"></div>
-				<div className="bg-otherPrimary h-2"></div>
-
-				<div className="bg-primary-light h-2"></div>
-				<div className="bg-otherPrimary-light h-2"></div>
-
-				<div className="bg-primary-dark h-2"></div>
-				<div className="bg-otherPrimary-dark h-2"></div>
-				{showAlert && (
-					<Alert
-						heading="Hi there"
-						type="primary"
-						onClose={() => {
-							setShowAlert(false);
-						}}
-					>
-						Hey there
-						<Heading styleLevel={1}>This should be an h1</Heading>
-						<HeadingLevel>
-							<Heading styleLevel={2}>This should be an h2</Heading>
-						</HeadingLevel>
-					</Alert>
-				)}
-
-				<div className="flex-grow flex">
-					{user && <Sidebar className="flex-shrink-0 w-20" />}
-					{isLoadingUser ? (
-						<Overlay>
-							<Spinner />
-						</Overlay>
-					) : (
-						<Main className="flex-grow" />
-					)}
+					{!shouldShowSidebar && <Footer className="flex-shrink-0" />}
 				</div>
-
-				<Footer className="flex-shrink-0" />
-			</div>
-		</AuthContext.Provider>
+			</AuthContext.Provider>
+		</Router>
 	);
 }
 

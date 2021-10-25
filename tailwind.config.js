@@ -1,4 +1,5 @@
 const colors = require('tailwindcss/colors');
+const plugins = require('./config/tailwindPlugins');
 
 module.exports = {
 	mode: 'jit',
@@ -37,5 +38,5 @@ module.exports = {
 	variants: {
 		extend: {},
 	},
-	plugins: [],
+	plugins: [plugins.outlinePlugin],
 };
