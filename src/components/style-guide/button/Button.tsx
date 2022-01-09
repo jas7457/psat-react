@@ -117,7 +117,7 @@ export default function Button<TButtonElement extends ButtonElement = 'button'>(
 				'inline-flex',
 				'uppercase',
 				'border',
-				'focus:outline-dashed outline outline-current -outline-offset-1',
+				'focus:outline-dashed outline outline-current focus:-outline-offset-1',
 				{ 'cursor-default pointer-events-none': disabled },
 				buttonStyleClasses,
 				sizeClasses,

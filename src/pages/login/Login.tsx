@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Redirect, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import Button from 'components/style-guide/button/Button';
 import Link from 'components/style-guide/link/Link';
@@ -10,13 +10,12 @@ import Card from 'components/style-guide/card/Card';
 export default function Login() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const location = useLocation<{ from?: Location } | null>();
+	const location = useLocation();
 
 	const { user, login } = useUnsafeAuth();
 
-	// if we're already logged in, redirect to the home page
 	if (user) {
-		return <Redirect to={{ pathname: '/' }} />;
+		return null;
 	}
 
 	return (
@@ -38,7 +37,11 @@ export default function Login() {
 						if (!email || !password) {
 							return;
 						}
-						login({ email, password, redirectTo: location.state?.from });
+						login({
+							email,
+							password,
+							redirectTo: (location.state as { from: Location } | null)?.from,
+						});
 					}}
 				>
 					<FormInput label="Email Address" icon="icon" value={email} onSetValue={setEmail} />

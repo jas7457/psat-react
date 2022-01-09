@@ -40,7 +40,7 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: ['.eslintrc.js', 'config/*.js'],
+			files: ['.eslintrc.js', 'config/*.js', 'tailwind.config.js'],
 			env: {
 				node: true,
 			},

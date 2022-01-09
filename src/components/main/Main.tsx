@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 // lazy load all pages
 const FourOFour = React.lazy(() => import('pages/fourofour/FourOFour'));
@@ -21,20 +21,26 @@ export default function Main({ className }: { className?: string }) {
 					</Overlay>
 				}
 			>
-				<Switch>
-					<PrivateRoute exact path="/">
-						<Home />
-					</PrivateRoute>
-					<PrivateRoute exact path="/about">
-						<About />
-					</PrivateRoute>
-					<Route exact path="/login">
-						<Login />
-					</Route>
-					<Route path="*">
-						<FourOFour />
-					</Route>
-				</Switch>
+				<Routes>
+					<Route
+						path="/"
+						element={
+							<PrivateRoute>
+								<Home />
+							</PrivateRoute>
+						}
+					/>
+					<Route
+						path="/about"
+						element={
+							<PrivateRoute>
+								<About />
+							</PrivateRoute>
+						}
+					/>
+					<Route path="/login" element={<Login />} />
+					<Route path="*" element={<FourOFour />} />
+				</Routes>
 			</Suspense>
 		</main>
 	);

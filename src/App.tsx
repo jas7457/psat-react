@@ -1,5 +1,5 @@
 import { ContextType, useEffect, useMemo, useState } from 'react';
-import { useHistory, BrowserRouter as Router, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Footer from 'components/footer/Footer';
 import Header from 'components/header/Header';
@@ -19,7 +19,7 @@ export default function App() {
 	const [user, setUser] = useState<UserData | null>(null);
 	const [isLoadingUser, setIsLoadingUser] = useState(true);
 
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	// an effect to load the user if one is saved as an access token
 	useEffect(() => {
@@ -46,42 +46,40 @@ export default function App() {
 				setUser(rest);
 				setAccessToken(accessToken);
 				setIsLoadingUser(false);
-				history.push(redirectTo);
+				navigate(redirectTo);
 			},
 			logout: () => {
 				setUser(null);
 				removeAccessToken();
 				setIsLoadingUser(false);
-				history.push('/login');
+				navigate('/login');
 			},
 		};
-	}, [user, setUser, history, setAccessToken, removeAccessToken]);
+	}, [user, setUser, setAccessToken, navigate, removeAccessToken]);
 
 	const shouldShowSidebar = !!user;
 
 	return (
-		<Router>
-			<AuthContext.Provider value={userValue}>
-				<div className="min-h-screen flex flex-col">
-					<Header className="flex-shrink-0" />
-					<div className="flex-grow flex">
-						{shouldShowSidebar && <Sidebar className="flex-shrink-0 w-20" />}
-						{isLoadingUser ? (
-							<Overlay>
-								<Spinner />
-							</Overlay>
-						) : (
-							<div className="flex-grow flex flex-col">
-								<Main className="flex-grow" />
-								{shouldShowSidebar && <Footer className="flex-shrink-0" />}
-							</div>
-						)}
-					</div>
-
-					{!shouldShowSidebar && <Footer className="flex-shrink-0" />}
+		<AuthContext.Provider value={userValue}>
+			<div className="min-h-screen flex flex-col">
+				<Header className="flex-shrink-0" />
+				<div className="flex-grow flex">
+					{shouldShowSidebar && <Sidebar className="flex-shrink-0 w-20" />}
+					{isLoadingUser ? (
+						<Overlay>
+							<Spinner />
+						</Overlay>
+					) : (
+						<div className="flex-grow flex flex-col">
+							<Main className="flex-grow" />
+							{shouldShowSidebar && <Footer className="flex-shrink-0" />}
+						</div>
+					)}
 				</div>
-			</AuthContext.Provider>
-		</Router>
+
+				{!shouldShowSidebar && <Footer className="flex-shrink-0" />}
+			</div>
+		</AuthContext.Provider>
 	);
 }
 

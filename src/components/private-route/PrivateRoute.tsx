@@ -1,26 +1,15 @@
-import { Route, Redirect, RouteProps } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
 import { useUnsafeAuth } from 'hooks/useAuth';
 
-export default function PrivateRoute({ children, ...rest }: RouteProps) {
+export default function PrivateRoute({ children }: { children: JSX.Element }) {
 	const { user } = useUnsafeAuth();
 
-	return (
-		<Route
-			{...rest}
-			render={({ location }) => {
-				return user ? (
-					children
-				) : (
-					<Redirect
-						to={{
-							pathname: '/login',
-							// put the state of the location so we can return to this page from the Login component
-							state: { from: location },
-						}}
-					/>
-				);
-			}}
-		/>
-	);
+	const location = useLocation();
+
+	if (!user) {
+		return <Navigate to="/login" state={{ from: location }} replace />;
+	}
+
+	return children;
 }
