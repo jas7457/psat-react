@@ -1,11 +1,11 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import Button, { ButtonProps } from './Button';
-import Heading, { HeadingLevel } from './Heading';
-import Card from './Card';
+import Button, { ButtonProps } from '../button/Button';
+import Heading, { HeadingLevel } from '../heading/Heading';
+import Card from '../card/Card';
 
-import { getBorderColor } from '../../util/getColors';
+import { getBorderColor } from '../../../util/getColors';
 
 /**
  * An alert to show the user

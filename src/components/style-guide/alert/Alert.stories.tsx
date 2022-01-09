@@ -2,10 +2,10 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { useState } from 'react';
 
 import Alert, { AlertProps } from './Alert';
-import Button from './Button';
+import Button from '../button/Button';
 
 export default {
-	title: 'Example/Alert',
+	title: 'Style Guide/Alert',
 	component: Alert,
 	// More on argTypes: https://storybook.js.org/docs/react/api/argtypes
 	argTypes: {

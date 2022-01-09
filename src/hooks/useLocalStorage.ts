@@ -1,12 +1,12 @@
 import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 
-export default function useLocalStorage<T>(
+export default function useLocalStorage<T extends string | undefined>(
 	key: string,
 	init: T | (() => T),
 ): [T, Dispatch<SetStateAction<T>>] {
 	const [state, setState] = useState(() => {
 		if (localStorage.hasOwnProperty(key)) {
-			return JSON.parse(localStorage.getItem(key) ?? '');
+			return localStorage.getItem(key) as T;
 		}
 
 		if (init instanceof Function) {
@@ -18,7 +18,11 @@ export default function useLocalStorage<T>(
 	// save the state to locale storage any time it changes
 	useEffect(() => {
 		try {
-			localStorage.setItem(key, JSON.stringify(state));
+			if (typeof state === 'string') {
+				localStorage.setItem(key, state);
+			} else {
+				localStorage.removeItem(key);
+			}
 		} catch (e) {
 			// ignore
 		}

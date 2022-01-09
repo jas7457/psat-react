@@ -1,9 +1,10 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Link as ReactRouterLink, LinkProps as ReactRouterLinkProps } from 'react-router-dom';
 
-import assertNever from '../../util/assertNever';
-import { getBgColor, getBorderColor } from '../../util/getColors';
+import assertNever from '../../../util/assertNever';
+import { getBgColor, getBorderColor } from '../../../util/getColors';
+import { PolymorphicAs } from 'types/utils';
+import Link from '../link/Link';
 
 /**
  * Typical buttons with some guard rails.
@@ -15,7 +16,6 @@ export default function Button<TButtonElement extends ButtonElement = 'button'>(
 	size = 'medium',
 	shape = 'default',
 	disabled = false,
-	justify = 'justify-center',
 	as,
 	className,
 	...rest
@@ -104,26 +104,16 @@ export default function Button<TButtonElement extends ButtonElement = 'button'>(
 		}
 	})();
 
-	// either 'a' or 'button' or ReactRouterLink
-	const Component = (() => {
-		if (!as || as === 'button') {
-			return 'button';
-		}
-		if (as === 'a') {
-			return 'a';
-		}
-
-		return ReactRouterLink;
-	})();
+	const Component = as || 'button';
 
 	return (
 		<Component
 			data-component="button"
-			{...(as === 'button' ? { disabled } : {})}
+			{...(Component === 'button' ? { disabled } : {})}
 			{...(disabled && { tabIndex: -1 })}
 			className={clsx(
 				className,
-				justify,
+				'justify-center',
 				'inline-flex',
 				'uppercase',
 				'border',
@@ -133,17 +123,16 @@ export default function Button<TButtonElement extends ButtonElement = 'button'>(
 				sizeClasses,
 				shapeClasses,
 			)}
-			{...rest}
+			{...(rest as PolymorphicAs<typeof Component> as any)}
 		>
 			{children}
 		</Component>
 	);
 }
 
-type ButtonElement = 'button' | 'link' | 'a';
+type ButtonElement = typeof Link | 'button' | 'a';
 export type ButtonProps<TButtonElement extends ButtonElement> = {
-	/* The element to render the button as, either "button" or "a" */
-	as?: TButtonElement;
+	children: React.ReactNode;
 
 	/** The color for the button */
 	color?: 'primary' | 'secondary' | 'warning' | 'danger' | 'success';
@@ -159,13 +148,4 @@ export type ButtonProps<TButtonElement extends ButtonElement> = {
 
 	/** Whether the button is disabled */
 	disabled?: boolean;
-
-	/** How to justify the text in the button */
-	justify?: 'justify-start' | 'justify-center' | 'justify-end';
-
-	children: React.ReactNode;
-} & (TButtonElement extends 'link'
-	? ReactRouterLinkProps
-	: TButtonElement extends 'button'
-	? React.ComponentPropsWithoutRef<'button'>
-	: React.ComponentPropsWithoutRef<'a'>);
+} & PolymorphicAs<TButtonElement>;

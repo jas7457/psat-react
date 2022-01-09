@@ -1,15 +1,15 @@
 import { ContextType, useEffect, useMemo, useState } from 'react';
 import { useHistory, BrowserRouter as Router, Link } from 'react-router-dom';
 
-import Footer from 'components/Footer';
-import Header from 'components/Header';
-import Main from 'components/Main';
+import Footer from 'components/footer/Footer';
+import Header from 'components/header/Header';
+import Main from 'components/main/Main';
 
 import AuthContext, { UserData } from 'contexts/AuthContext';
-import Spinner from 'components/style-guide/Spinner';
+import Spinner from 'components/style-guide/spinner/Spinner';
 import useCookie from 'hooks/useCookie';
-import Sidebar from 'components/Sidebar';
-import Overlay from 'components/style-guide/Overlay';
+import Sidebar from 'components/sidebar/Sidebar';
+import Overlay from 'components/style-guide/overlay/Overlay';
 
 export default function App() {
 	const [accessToken, setAccessToken, removeAccessToken] = useCookie<string | null>(

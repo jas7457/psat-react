@@ -5,11 +5,11 @@ export default function useFetch<TData extends object>(url: string, options?: Re
 	const optionsRef = useRef(options);
 	optionsRef.current = options;
 
-	const controller = useMemo(() => new AbortController(), []);
+	const abortController = useMemo(() => new AbortController(), []);
 
 	const [data, { state, error }] = useAsync<TData>(async () => {
 		try {
-			const response = await fetch(url, { ...optionsRef.current, signal: controller.signal });
+			const response = await fetch(url, { ...optionsRef.current, signal: abortController.signal });
 
 			if (!response.ok) {
 				const error = await response.text();
@@ -24,11 +24,11 @@ export default function useFetch<TData extends object>(url: string, options?: Re
 
 			throw e;
 		}
-	}, [url, controller]);
+	}, [url, abortController]);
 
 	const abort = useCallback(() => {
-		controller.abort();
-	}, [controller]);
+		abortController.abort();
+	}, [abortController]);
 
 	useEffect(() => {
 		// automatically cancel the request on unmount or the url changes

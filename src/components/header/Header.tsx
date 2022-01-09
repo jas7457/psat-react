@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 
 import { useUnsafeAuth } from 'hooks/useAuth';
-import Button from 'components/style-guide/Button';
-import Link from 'components/style-guide/Link';
+import Button from 'components/style-guide/button/Button';
+import Link from 'components/style-guide/link/Link';
 
 export default function Header({ className }: { className?: string }) {
 	const auth = useUnsafeAuth();
@@ -15,8 +15,12 @@ export default function Header({ className }: { className?: string }) {
 					<span className="text-xl font-medium">Security Education Platform</span>
 					{auth.user && (
 						<>
-							<Link to="/">Home</Link>
-							<Link to="/about">About</Link>
+							<Link color="primary" to="/" linkStyle="underline">
+								Home
+							</Link>
+							<Link color="primary" linkStyle="underline" to="/about">
+								About
+							</Link>
 						</>
 					)}
 				</div>

@@ -6,7 +6,7 @@ const oneThroughTwelve = Array.from({ length: 12 }, (_val, index) => index + 1);
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-	title: 'Example/Grid',
+	title: 'Style Guide/Grid',
 	component: Grid,
 	// More on argTypes: https://storybook.js.org/docs/react/api/argtypes
 	argTypes: {

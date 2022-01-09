@@ -6,7 +6,7 @@ const oneThroughSix = Array.from({ length: 6 }, (_val, index) => index + 1);
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-	title: 'Example/Heading',
+	title: 'Style Guide/Heading',
 	component: Heading,
 	// More on argTypes: https://storybook.js.org/docs/react/api/argtypes
 	argTypes: {

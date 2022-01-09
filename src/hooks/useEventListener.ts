@@ -10,7 +10,7 @@ export default function useEventListener<
 		element?: typeof window | typeof document | React.MutableRefObject<TElement>;
 	},
 ) {
-	// Create a ref that stores handler so we don't continusly add/remove/add/remove event listeners
+	// Create a ref that stores handler so we don't continuously add/remove/add/remove event listeners
 	const savedHandler = useRef(handler);
 	savedHandler.current = handler;
 

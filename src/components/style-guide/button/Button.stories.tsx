@@ -1,10 +1,11 @@
+import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 import Button, { ButtonProps } from './Button';
+import Link from '../link/Link';
 
 export default {
-	title: 'Example/Button',
+	title: 'Style Guide/Button',
 	component: Button,
 	argTypes: {
 		color: { defaultValue: 'primary' },
@@ -12,15 +13,8 @@ export default {
 		size: { defaultValue: 'medium' },
 		shape: { defaultValue: 'normal' },
 		disabled: { control: { type: 'boolean' }, defaultValue: false },
-		as: { control: { type: 'select', options: ['button', 'a'] }, defaultValue: 'button' },
+		as: { control: false },
 	},
-	decorators: [
-		(Story) => (
-			<Router>
-				<Story />
-			</Router>
-		),
-	],
 } as ComponentMeta<typeof Button>;
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -35,16 +29,16 @@ NormalButton.args = {
 	onClick: () => alert('You clicked the button, WOW'),
 };
 
-export const LinkButton = (args: ButtonProps<'link'>) => {
+export const LinkButton = (args: ButtonProps<typeof Link>) => {
 	return (
 		<div className="space-y-4">
 			<p>
-				You can style Links (React Router Links) the same as you'd style a button. Simply use the{' '}
+				You can style Links (the Link component) the same as you'd style a button. Simply use the{' '}
 				<code>as</code> prop to change it to <code>Link</code>.
 			</p>
 			<p>
-				TypeScript is also smart enough to know that you can't pass an <code>to</code> to the{' '}
-				<code>Button</code> component unless you specify <code>as="link"</code>.
+				TypeScript is also smart enough to know that you can't pass a <code>to</code> prop to the{' '}
+				<code>Button</code> component unless you specify <code>as={`<Link>`}</code>.
 			</p>
 			<Button {...args} />
 		</div>
@@ -52,20 +46,18 @@ export const LinkButton = (args: ButtonProps<'link'>) => {
 };
 LinkButton.args = {
 	children: 'Link',
-	as: 'link',
-	to: '/?path=/story/example-button--normal-button',
+	as: Link,
+	to: '/?path=/story/style-guide-button--normal-button',
 	target: '_blank',
 };
 
-export const AnchorButton = (args: ButtonProps<'link'>) => {
+export const AnchorButton = (args: ButtonProps<typeof Link>) => {
 	return (
 		<div className="space-y-4">
 			<p>
-				If you want to use an anchor tag, you can use the <code>as="a"</code> prop. This is helpful
-				for external links that React Router can't handle.
-			</p>
-			<p>
-				Use an <code>href</code> just like you would for a normal anchor.
+				If you want to use an anchor tag, you can use the <code>as={`{Link}`}</code> prop along with{' '}
+				<code>href</code> instead of <code>to</code>. This will render a normal anchor instead of a
+				React Router Link.
 			</p>
 			<Button {...args} />
 		</div>
@@ -73,7 +65,7 @@ export const AnchorButton = (args: ButtonProps<'link'>) => {
 };
 AnchorButton.args = {
 	children: 'Anchor',
-	as: 'a',
+	as: Link,
 	href: 'https://www.google.com',
 	target: '_blank',
 };

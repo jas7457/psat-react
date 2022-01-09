@@ -7,9 +7,9 @@ const Home = React.lazy(() => import('pages/home/Home'));
 const Login = React.lazy(() => import('pages/login/Login'));
 const About = React.lazy(() => import('pages/about/About'));
 
-import Spinner from 'components/style-guide/Spinner';
-import Overlay from 'components/style-guide/Overlay';
-import PrivateRoute from 'components/PrivateRoute';
+import Spinner from 'components/style-guide/spinner/Spinner';
+import Overlay from 'components/style-guide/overlay/Overlay';
+import PrivateRoute from 'components/private-route/PrivateRoute';
 
 export default function Main({ className }: { className?: string }) {
 	return (

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import clsx from 'clsx';
 
-import HeadingContext from '../../contexts/HeadingContext';
+import HeadingContext from '../../../contexts/HeadingContext';
 
 /**
  * A component to automatically figure out the correct heading level based on React Context

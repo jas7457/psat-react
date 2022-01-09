@@ -1,14 +1,16 @@
 import { useState, useEffect, Dispatch, SetStateAction, useCallback } from 'react';
 import Cookies from 'js-cookie';
 
-export default function useCookie<T>(
+type ValidType = string | null;
+
+export default function useCookie<T extends ValidType>(
 	key: string,
-	init: T | (() => T),
-): [T, Dispatch<SetStateAction<T>>, () => void] {
+	init: ValidType | (() => ValidType),
+): [ValidType, Dispatch<SetStateAction<ValidType>>, () => void] {
 	const [state, setState] = useState(() => {
 		const value = Cookies.get(key);
 		if (value) {
-			return JSON.parse(value);
+			return value;
 		}
 
 		if (init instanceof Function) {
@@ -29,7 +31,7 @@ export default function useCookie<T>(
 			return;
 		}
 		try {
-			Cookies.set(key, JSON.stringify(state));
+			Cookies.set(key, state);
 		} catch (e) {
 			// ignore
 		}
