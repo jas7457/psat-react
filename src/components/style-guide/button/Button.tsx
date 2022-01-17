@@ -6,6 +6,14 @@ import { getBgColor, getBorderColor } from '../../../util/getColors';
 import { PolymorphicAs } from 'types/utils';
 import Link from '../link/Link';
 
+function Test({ name }: { name?: string } & React.ComponentPropsWithoutRef<'button'>) {
+	return <div className="bg-primary-light">{name}</div>;
+}
+
+function Test2() {
+	return <Test />;
+}
+
 /**
  * Typical buttons with some guard rails.
  */
