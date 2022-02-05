@@ -17,7 +17,7 @@ export default function useEventListener<
 	useEffect(() => {
 		// Create event listener that calls handler function stored in ref
 		const eventListener = (e: Event) => {
-			savedHandler.current(e as any);
+			savedHandler.current(e as unknown as WindowEventMap[TEventName]);
 		};
 
 		// Define the listening target

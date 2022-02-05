@@ -1,8 +1,7 @@
-import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import Button, { ButtonProps } from './Button';
-import Link from '../link/Link';
+import Link from '~/components/style-guide/link/Link';
 
 export default {
 	title: 'Style Guide/Button',

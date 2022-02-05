@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import type { PolymorphicAs } from '../../../types/utils';
+import type { PolymorphicAs } from '~/types/utils';
 
 export default function FuseMenu({ children, className, ...rest }: FuseMenuProps) {
 	return (

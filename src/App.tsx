@@ -1,21 +1,18 @@
 import { ContextType, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Footer from 'components/footer/Footer';
-import Header from 'components/header/Header';
-import Main from 'components/main/Main';
+import Footer from '~/components/footer/Footer';
+import Header from '~/components/header/Header';
+import Main from '~/components/main/Main';
 
-import AuthContext, { UserData } from 'contexts/AuthContext';
-import Spinner from 'components/style-guide/spinner/Spinner';
-import useCookie from 'hooks/useCookie';
-import Sidebar from 'components/sidebar/Sidebar';
-import Overlay from 'components/style-guide/overlay/Overlay';
+import AuthContext, { UserData } from '~/contexts/AuthContext';
+import Spinner from '~/components/style-guide/spinner/Spinner';
+import useCookie from '~/hooks/useCookie';
+import Sidebar from '~/components/sidebar/Sidebar';
+import Overlay from '~/components/style-guide/overlay/Overlay';
 
 export default function App() {
-	const [accessToken, setAccessToken, removeAccessToken] = useCookie<string | null>(
-		'access_token',
-		null,
-	);
+	const [accessToken, setAccessToken, removeAccessToken] = useCookie('access_token', null);
 	const [user, setUser] = useState<UserData | null>(null);
 	const [isLoadingUser, setIsLoadingUser] = useState(true);
 

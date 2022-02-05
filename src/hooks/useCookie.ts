@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 
 type ValidType = string | null;
 
-export default function useCookie<T extends ValidType>(
+export default function useCookie(
 	key: string,
 	init: ValidType | (() => ValidType),
 ): [ValidType, Dispatch<SetStateAction<ValidType>>, () => void] {
@@ -35,7 +35,7 @@ export default function useCookie<T extends ValidType>(
 		} catch (e) {
 			// ignore
 		}
-	}, [key, state]);
+	}, [key, removeCookie, state]);
 
 	return [state, setState, removeCookie];
 }

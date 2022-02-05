@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
 import clsx from 'clsx';
 
-import Button from '../button/Button';
-import Overlay from '../overlay/Overlay';
-import useClickOutside from '../../../hooks/useClickOutside';
-import useEventListener from '../../../hooks/useEventListener';
-import Card from '../card/Card';
+import Button from '~/components/style-guide/button/Button';
+import Overlay from '~/components/style-guide/overlay/Overlay';
+import Card from '~/components/style-guide/card/Card';
+import useClickOutside from '~/hooks/useClickOutside';
+import useEventListener from '~/hooks/useEventListener';
 
 // also export the related Modal components for easier imports elsewhere
 export { default as ModalHeader, ModalTitle, ModalSubTitle } from './ModalHeader';

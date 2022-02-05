@@ -1,15 +1,15 @@
 import { useState } from 'react';
 
-import Container from 'components/style-guide/container/Container';
-import Heading, { HeadingLevel } from 'components/style-guide/heading/Heading';
-import Button from 'components/style-guide/button/Button';
+import Container from '~/components/style-guide/container/Container';
+import Heading, { HeadingLevel } from '~/components/style-guide/heading/Heading';
+import Button from '~/components/style-guide/button/Button';
 import Modal, {
 	ModalBody,
 	ModalFooter,
 	ModalHeader,
 	ModalSubTitle,
 	ModalTitle,
-} from 'components/style-guide/modal/Modal';
+} from '~/components/style-guide/modal/Modal';
 
 export default function Home() {
 	const [isModalOpen, setIsModalOpen] = useState(false);

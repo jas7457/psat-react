@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import Button from 'components/style-guide/button/Button';
-import Link from 'components/style-guide/link/Link';
-import { useUnsafeAuth } from 'hooks/useAuth';
+import Button from '~/components/style-guide/button/Button';
+import Link from '~/components/style-guide/link/Link';
+import { useUnsafeAuth } from '~/hooks/useAuth';
 import type { Location } from 'history';
-import Card from 'components/style-guide/card/Card';
+import Card from '~/components/style-guide/card/Card';
 
 export default function Login() {
 	const [email, setEmail] = useState('');

@@ -1,5 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { useState } from 'react';
+import { ComponentMeta } from '@storybook/react';
 
 import Filter, { useFilters } from './Filter';
 

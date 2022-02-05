@@ -1,7 +1,7 @@
-import Container from 'components/style-guide/container/Container';
-import Heading, { HeadingLevel } from 'components/style-guide/heading/Heading';
-import Button from 'components/style-guide/button/Button';
-import Link from 'components/style-guide/link/Link';
+import Container from '~/components/style-guide/container/Container';
+import Heading, { HeadingLevel } from '~/components/style-guide/heading/Heading';
+import Button from '~/components/style-guide/button/Button';
+import Link from '~/components/style-guide/link/Link';
 
 export default function About() {
 	return (

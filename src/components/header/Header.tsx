@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 
-import { useUnsafeAuth } from 'hooks/useAuth';
-import Button from 'components/style-guide/button/Button';
-import Link from 'components/style-guide/link/Link';
+import { useUnsafeAuth } from '~/hooks/useAuth';
+import Button from '~/components/style-guide/button/Button';
+import Link from '~/components/style-guide/link/Link';
 
 export default function Header({ className }: { className?: string }) {
 	const auth = useUnsafeAuth();

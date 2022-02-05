@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Link as ReactRouterLink, LinkProps as ReactRouterLinkProps } from 'react-router-dom';
 
-import { Colors, getColor } from '../../../util/getColors';
+import { Colors, getColor } from '~/util/getColors';
 
 /**
  * Allows you to pass either "to" or "href" but not both. "to" is for react-router-dom, "href" is for anchors.

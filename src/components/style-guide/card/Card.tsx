@@ -6,7 +6,7 @@ import clsx from 'clsx';
  * Wrapped in a forwardRef so other components (namely Modal) can set a ref on it.
  */
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-	({ children, className, ...rest }: CardProps, ref) => {
+	({ children, className, ...rest }, ref) => {
 		return (
 			<div
 				ref={ref}
